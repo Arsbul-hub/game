@@ -310,7 +310,7 @@ while run:
         gost.monsters.setImg(sc,(mx1+1)*23,(my1+1)*23,"Images/0.png")
         gost.monsters.setImg(sc,(mx2+1)*23,(my2+1)*23,"Images/0.png")
         gost.monsters.setImg(sc,(mx3+1)*23,(my3+1)*23,"Images/0.png")
-        if g == 3:#босс#
+        if g == 3:#босс
             rect16 = surf8.get_rect(bottomright=((mx4+1)*23,(my4+1)*23))
             sc.blit(surf8,rect16)
     pygame.display.update()
