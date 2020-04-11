@@ -123,8 +123,9 @@ while run:
             y = 10
            
             l = maps.maps(0)
-        if h > 0:
-            #######
+        if h > 0 and g1 != "pause":
+
+
             mx = 3
             my = 20
             #######
@@ -139,9 +140,6 @@ while run:
             #######
             mx4 = 25
             my4 = 10
-            x = 11
-            y = 11
-
 #####пауза
 
         if g1 == "pause":
