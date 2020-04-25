@@ -10,6 +10,8 @@ class Mob(object):
         raise NotImplementedError('Method abstobj.aXbstааааmeth is pure virtual')
     def despawn():
         raise NotImplementedError('Method abstobj.abstmeth is pure virtual')
+    def getPos(self):
+        return self.x,self.y
 class Monster(Mob):
     def __init__(self,x,y,l,rand):
         self.l = l
@@ -37,8 +39,7 @@ class Monster(Mob):
             if self.l[self.x][self.y] == 1:
                 self.y+=1
                 self.rand = random.randint(1,4)
-    def getPos(self):
-        return self.x,self.y
+
 class Hero(Mob):
     def __init__(self,x,y,l,point):
         self.point = point
@@ -55,8 +56,8 @@ class Hero(Mob):
                         self.x += 1
                     if keyboard.is_pressed('a') and self.l[self.y][self.x-1] != 1:
                         self.x -= 1
-    def collision_check(mpos):
-        if (self.x,self.y) == mpos:
+    def collision_check(self,mpos):
+        if (self.y,self.x) == mpos or mpos == (self.y,self.x):
             return True
         else:
             return False
@@ -66,6 +67,5 @@ class Hero(Mob):
             self.l[self.y][self.x] = 0
     def setPoint(self):
         self.point = 0
-    def getPos(self):
-        return self.x,self.y
+
 

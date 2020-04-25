@@ -1,5 +1,6 @@
 import keyboard
 from random import *
+import array
 import pygame
 import maps
 from Mobs import *
@@ -21,14 +22,15 @@ surf6 = pygame.image.load("Images/1.png")
 #surf7 = pygame.image.load("Images/portal.png")
 #surf8 = pygame.image.load("Images/stars.png")
 h = Hero(10,11,l,0)
-m = Monster(10,12,l,randint(1,4))
-m1 = Monster(10,12,l,randint(1,4))
-m2 = Monster(10,12,l,randint(1,4))
-m3 = Monster(10,12,l,randint(1,4))
-m4 = Monster(10,12,l,randint(1,4))
+m = []
+#m = Monster(10,12,l,randint(1,4))
+#m1 = Monster(10,12,l,randint(1,4))
+#m2 = Monster(10,12,l,randint(1,4))
+#m3 = Monster(10,12,l,randint(1,4))
+#m4 = Monster(10,12,l,randint(1,4))
 rand = random.randint(1,4)
-
-
+for i in range(4):
+    m.append(Monster(10,12,l,randint(1,4)))
 while run:
     sc.fill((0,0,0))
     for ev in pygame.event.get():
@@ -60,57 +62,44 @@ while run:
         if Lavel == 1:
 
                     h.move()
-                    m.move()
-                    m1.move()
-                    m2.move()
-                    m3.move()
-                    mx,my = m.getPos()
-                    mx1 = m1.x
-                    my1 = m1.y
-                    
-                    mx2 = m2.x
-                    my2 = m2.y
-                    
-                    mx3 = m3.x
-                    my3 = m3.y
-                    
-                    #print(x,mx,y,my)
-                    if h.collision_check(m.getPos()) == True:
-                    
-                        Plh -= 1
-                        Game = False
-                        Menu = True
-                        
-                    if Plh == 0:
-                        h.setPoint()
-                        #point = 0
-                        Plh = 3
-                        Plh -= 1
-                        x = 10
-                        y = 11
-                        mx = 10
-                        my = 10
-                        mx1 = 10
-                        my1 = 10   
-                        mx2 = 10
-                        my2 = 10
-                        mx3 = 10
-                        my3 = 10
-                        l = maps.maps(0)
-                    h.getPoint()
-                    print(point)
-                    
+                    for j in range(4):
+                        m[j].move()
 
+                        mx,my = m[j].getPos()
+
+                    
+                        #print(h.collision_check(m[j].getPos()))
+                        if h.collision_check(m[j].getPos()) == True:
+                        
+                            Plh -= 1
+                            Game = False
+                            Menu = True
+                        
+                        if Plh == 0:
+                            h.setPoint()
+                            #point = 0
+                            Plh = 3
+                            Plh -= 1
+                            x = 10
+                            y = 11
+                            mx = 10
+                            my = 10
+                            mx1 = 10
+                            my1 = 10   
+                            mx2 = 10
+                            my2 = 10
+                            mx3 = 10
+                            my3 = 10
+                            l = maps.maps(0)
+                        h.getPoint()
+                        #print(point)
+                        
+
+                        rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
+                        sc.blit(surf3,rect3)
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
         sc.blit(surf2,rect2)
-        rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
-        sc.blit(surf3,rect3)
-        rect4 = surf3.get_rect(bottomright=((my1+1)*23,(mx1+1)*23))
-        sc.blit(surf3,rect4)
-        rect5 = surf3.get_rect(bottomright=((my2+1)*23,(mx2+1)*23))
-        sc.blit(surf3,rect5)
-        rect6 = surf3.get_rect(bottomright=((my3+1)*23,(mx3+1)*23))
-        sc.blit(surf3,rect6)
+
     pygame.display.update()
     pygame.time.delay(50)               
 pygame.quit()
