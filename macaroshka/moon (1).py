@@ -75,8 +75,10 @@ while run:
                     
                     mx3 = m3.x
                     my3 = m3.y
+                    
                     #print(x,mx,y,my)
-                    if x == my and y == mx or x == my1 and y == mx1 or x == my2 and y == mx2 or x == my3 and y == mx3:
+                    if h.collision_check(x,y,mx,my) == True:
+                    
                         Plh -= 1
                         Game = False
                         Menu = True
