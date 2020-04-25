@@ -34,16 +34,7 @@ while run:
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             run = False
-    for j in range(30):
-        for i in range(30):
-                if l[i][j] == 1:
-                    pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                if l[i][j] == 1:
-                    rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                    sc.blit(surf1,rect1)
-                if l[i][j] == 2:
-                    rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                    sc.blit(surf6,rect6)
+
     x = h.x
     y = h.y
     point = h.point
@@ -57,7 +48,16 @@ while run:
                 Lavel = 1
                 sc.fill((0,0,0))
     if Game == True:
-            
+        for j in range(30):
+            for i in range(30):
+                    if l[i][j] == 1:
+                        pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
+                    if l[i][j] == 1:
+                        rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                        sc.blit(surf1,rect1)
+                    if l[i][j] == 2:
+                        rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                        sc.blit(surf6,rect6)
         if Lavel == 1:
 
                     h.move()
@@ -80,13 +80,11 @@ while run:
                         Plh -= 1
                         Game = False
                         Menu = True
+                        
                     if Plh == 0:
-                        time.sleep(0.5)
-                        point = 0
+                        h.setPoint()
+                        #point = 0
                         Plh = 3
-                    h.getPoint()
-                    print(point)
-                    if Game == False and Menu == True:
                         Plh -= 1
                         x = 10
                         y = 11
@@ -97,7 +95,12 @@ while run:
                         mx2 = 10
                         my2 = 10
                         mx3 = 10
-                        my3 = 10   
+                        my3 = 10
+                        l = maps.maps(0)
+                    h.getPoint()
+                    print(point)
+                    
+
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
         sc.blit(surf2,rect2)
         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))

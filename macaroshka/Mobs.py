@@ -41,6 +41,7 @@ class Hero(Mob):
     def __init__(self,x,y,l,point):
         self.point = point
         self.l = l
+        
         Mob.__init__(self,x,y)
     def move(self):
                     if keyboard.is_pressed('w') and self.l[self.y-1][self.x] != 1:
@@ -56,3 +57,5 @@ class Hero(Mob):
         if self.l[self.y][self.x] == 2:
             self.point += 1
             self.l[self.y][self.x] = 0
+    def setPoint(self):
+        self.point = 0
