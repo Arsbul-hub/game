@@ -28,6 +28,7 @@ m = []
 #m2 = Monster(10,12,l,randint(1,4))
 #m3 = Monster(10,12,l,randint(1,4))
 #m4 = Monster(10,12,l,randint(1,4))
+num_m = 4
 rand = random.randint(1,4)
 for i in range(4):
     m.append(Monster(10,12,l,randint(1,4)))
@@ -62,14 +63,14 @@ while run:
         if Lavel == 1:
 
                     h.move()
-                    for j in range(4):
-                        m[j].move()
+                    for j in m:
+                        j.move()
 
-                        mx,my = m[j].getPos()
+                        mx,my = j.getPos()
 
                     
                         #print(h.collision_check(m[j].getPos()))
-                        if h.collision_check(m[j].getPos()) == True:
+                        if h.collision_check(j.getPos()) == True:
                         
                             Plh -= 1
                             Game = False
