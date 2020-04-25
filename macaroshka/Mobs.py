@@ -37,6 +37,8 @@ class Monster(Mob):
             if self.l[self.x][self.y] == 1:
                 self.y+=1
                 self.rand = random.randint(1,4)
+    def getPos(self):
+        return self.x,self.y
 class Hero(Mob):
     def __init__(self,x,y,l,point):
         self.point = point
@@ -53,9 +55,11 @@ class Hero(Mob):
                         self.x += 1
                     if keyboard.is_pressed('a') and self.l[self.y][self.x-1] != 1:
                         self.x -= 1
-    def collision_check(x,y,mx,my):
-        if x == my and y == mx:
+    def collision_check(mpos):
+        if (self.x,self.y) == mpos:
             return True
+        else:
+            return False
     def getPoint(self):
         if self.l[self.y][self.x] == 2:
             self.point += 1
@@ -64,3 +68,4 @@ class Hero(Mob):
         self.point = 0
     def getPos(self):
         return self.x,self.y
+

@@ -35,8 +35,7 @@ while run:
         if ev.type == pygame.QUIT:
             run = False
 
-    x = h.x
-    y = h.y
+    x,y = h.getPos()
     point = h.point
     if Menu == True:
         rect4 = surf4.get_rect(bottomright=(690,690))
@@ -65,8 +64,7 @@ while run:
                     m1.move()
                     m2.move()
                     m3.move()
-                    mx = m.x
-                    my = m.y
+                    mx,my = m.getPos()
                     mx1 = m1.x
                     my1 = m1.y
                     
@@ -77,7 +75,7 @@ while run:
                     my3 = m3.y
                     
                     #print(x,mx,y,my)
-                    if h.collision_check(x,y,mx,my) == True:
+                    if h.collision_check(m.getPos()) == True:
                     
                         Plh -= 1
                         Game = False
