@@ -31,7 +31,7 @@ m = []
 num_m = 4
 rand = random.randint(1,4)
 for i in range(4):
-    m.append(Monster(10,12,l,randint(1,4)))
+    m.append(Monster(10,12,maps.maps(0),randint(1,4)))
 while run:
     sc.fill((0,0,0))
     for ev in pygame.event.get():
@@ -81,19 +81,14 @@ while run:
                                 h.setPoint()
                                 #point = 0
                                 Plh = 3
-                                Plh -= 1
-                                x = 10
-                                y = 11
-                                mx = 10
-                                my = 10
-                                mx1 = 10
-                                my1 = 10   
-                                mx2 = 10
-                                my2 = 10
-                                mx3 = 10
-                                my3 = 10
-                                l = maps.maps(0)
-                                break 
+                                #Plh -= 1
+
+
+                                #l = maps.maps(0)
+                                h.l = maps.maps(0)
+                                
+                                break
+                                
                         h.getPoint()
                                 
                         
