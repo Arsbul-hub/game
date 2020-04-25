@@ -93,7 +93,7 @@ while run:
                                 mx3 = 10
                                 my3 = 10
                                 l = maps.maps(0)
-                                break
+                                break 
                         h.getPoint()
                                 
                         
