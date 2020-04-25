@@ -76,28 +76,31 @@ while run:
                             Game = False
                             Menu = True
                         
-                        if Plh == 0:
-                            h.setPoint()
-                            #point = 0
-                            Plh = 3
-                            Plh -= 1
-                            x = 10
-                            y = 11
-                            mx = 10
-                            my = 10
-                            mx1 = 10
-                            my1 = 10   
-                            mx2 = 10
-                            my2 = 10
-                            mx3 = 10
-                            my3 = 10
-                            l = maps.maps(0)
+                            if Plh == 0:
+                                print("fff")
+                                h.setPoint()
+                                #point = 0
+                                Plh = 3
+                                Plh -= 1
+                                x = 10
+                                y = 11
+                                mx = 10
+                                my = 10
+                                mx1 = 10
+                                my1 = 10   
+                                mx2 = 10
+                                my2 = 10
+                                mx3 = 10
+                                my3 = 10
+                                l = maps.maps(0)
+                                break
                         h.getPoint()
-                        #print(point)
+                                
                         
 
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
+                        #
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
         sc.blit(surf2,rect2)
 
