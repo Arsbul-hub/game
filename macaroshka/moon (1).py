@@ -39,8 +39,7 @@ while run:
         if ev.type == pygame.QUIT:
             run = False
     # меню
-    x,y = h.getPos()
-    point = h.point
+
     if Menu == True:
         rect4 = surf4.get_rect(bottomright=(690,690))
         sc.blit(surf4,rect4)
@@ -53,18 +52,13 @@ while run:
     # игра
     if Game == True:
         # load texture
-        for j in range(30):
-            for i in range(30):
-                    if l[i][j] == 1:
-                        pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                    if l[i][j] == 1:
-                        rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                        sc.blit(surf1,rect1)
-                    if l[i][j] == 2:
-                        rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                        sc.blit(surf6,rect6)
+
         # lavel
         if Lavel == 1:
+                    x,y = h.getPos()
+                    point = h.point
+                    rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
+                    sc.blit(surf2,rect2)
                     # монстры
                     h.move()
                     for j in m:
@@ -95,12 +89,24 @@ while run:
                                 
                         h.getPoint()
                                 
-                    
+                        for j in range(30):
+                            for i in range(30):
+                                l2 = maps.get_map()
+                                import math
+                                if math.sqrt(pow(i,2)+pow(j,2)) < 5:
+                                    l2[i][j] = True
+                                    if l2[i][j] == False:
+                                        pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
+                                    if l2[i][j] == True:
+                                        rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                                        sc.blit(surf1,rect1)
+                                    if l2[i][j] == True:
+                                        rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                                        sc.blit(surf6,rect6)                    
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
                         #
-        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
-        sc.blit(surf2,rect2)
+
 
     pygame.display.update()
     pygame.time.delay(50)               
