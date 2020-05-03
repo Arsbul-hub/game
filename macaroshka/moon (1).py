@@ -13,6 +13,7 @@ Game = False
 Lavel = 0
 Plh = 3
 point = 0
+import math
 #мпорт моделей
 surf1 = pygame.image.load("Images/block.png")
 surf2 = pygame.image.load("Images/pac.png")
@@ -88,23 +89,18 @@ while run:
                                 break
                                 
                         h.getPoint()
-                                
-                        for j in range(30):
-                            for i in range(30):
-                                l2 = maps.get_map()
-                                import math
-                                if math.sqrt(pow(i,2)+pow(j,2)) < 5:
-                                    l2[i][j] = True
-                                    if l2[i][j] == False:
-                                        pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                                    if l2[i][j] == True:
-                                        rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                                        sc.blit(surf1,rect1)
-                                    if l2[i][j] == True:
-                                        rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
-                                        sc.blit(surf6,rect6)                    
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
+                        for j in range(30):
+                              for i in range(30):
+                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 1:
+                                           #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
+                                           rect1 = surf1.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                                           sc.blit(surf1,rect1)
+                                           rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
+                                           sc.blit(surf6,rect6)
+                                    else:
+                                        pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
                         #
 
 
