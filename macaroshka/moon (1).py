@@ -13,6 +13,7 @@ Game = False
 Lavel = 0
 Plh = 3
 point = 0
+#мпорт моделей
 surf1 = pygame.image.load("Images/block.png")
 surf2 = pygame.image.load("Images/pac.png")
 surf3 = pygame.image.load("Images/0.png")
@@ -21,23 +22,23 @@ surf4 = pygame.image.load("Images/stars.png")
 surf6 = pygame.image.load("Images/1.png")
 #surf7 = pygame.image.load("Images/portal.png")
 #surf8 = pygame.image.load("Images/stars.png")
+# ГЕРОЙ
 h = Hero(10,11,l,0)
+# монстры
 m = []
-#m = Monster(10,12,l,randint(1,4))
-#m1 = Monster(10,12,l,randint(1,4))
-#m2 = Monster(10,12,l,randint(1,4))
-#m3 = Monster(10,12,l,randint(1,4))
-#m4 = Monster(10,12,l,randint(1,4))
-num_m = 4
+
+
 rand = random.randint(1,4)
 for i in range(4):
     m.append(Monster(10,12,maps.maps(0),randint(1,4)))
+
 while run:
+    # Проверка событий
     sc.fill((0,0,0))
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             run = False
-
+    # меню
     x,y = h.getPos()
     point = h.point
     if Menu == True:
@@ -49,7 +50,9 @@ while run:
                 Menu = False
                 Lavel = 1
                 sc.fill((0,0,0))
+    # игра
     if Game == True:
+        # load texture
         for j in range(30):
             for i in range(30):
                     if l[i][j] == 1:
@@ -60,8 +63,9 @@ while run:
                     if l[i][j] == 2:
                         rect6 = surf6.get_rect(bottomright=((j+1)*23,(i+1)*23))
                         sc.blit(surf6,rect6)
+        # lavel
         if Lavel == 1:
-
+                    # монстры
                     h.move()
                     for j in m:
                         j.move()
@@ -84,15 +88,14 @@ while run:
                                 #Plh -= 1
 
 
-                                #l = maps.maps(0)
-                                h.l = maps.maps(0)
+                                l = maps.maps(0)
+                                h.l = l
                                 
                                 break
                                 
                         h.getPoint()
                                 
-                        
-
+                    
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
                         #
