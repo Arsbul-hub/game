@@ -68,7 +68,7 @@ while run:
                     point = h.point
 
                     # монстры
-                    h.move()
+                    
                     for j in m:
                         j.move()
 
@@ -160,7 +160,7 @@ while run:
                                     else:
                                         pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
         # lavel
-
+#d
     pygame.display.update()
     pygame.time.delay(50)               
 pygame.quit()
