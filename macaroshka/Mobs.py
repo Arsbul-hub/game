@@ -62,9 +62,9 @@ class Hero(Mob):
         else:
             return False
     def getPoint(self):
-        if self.l[self.y][self.x] == 2:
+        if self.l[self.y+1][self.x+1] == 2:
             self.point += 1
-            self.l[self.y][self.x] = 0
+            self.l[self.y+1][self.x+1] = 0
     def setPoint(self):
         self.point = 0
 

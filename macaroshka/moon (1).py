@@ -60,7 +60,7 @@ while run:
 
         # load texture
         if Lavel == 1:
-            
+                    x,y = h.getPos()
                     print(point)
                     if keyboard.is_pressed('1') == True:
                             h.point = 422
@@ -76,7 +76,7 @@ while run:
 
                     
                         #print(h.collision_check(m[j].getPos()))
-                        if h.collision_check(j.getPos()) == True and point < 422:
+                        if h.collision_check(j.getPos()) == True and point <= 422:
                         
                             Plh -= 1
                             Game = False
@@ -95,11 +95,9 @@ while run:
                                 h.l = l
                                 
                                 break
-                        x,y = h.getPos()
-                        h.move()
-                        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
-                        sc.blit(surf2,rect2)
-                        if point > 422:
+
+
+                        if point >= 422:
                             if h.collision_check(j.getPos()) == True:
                                 if keyboard.is_pressed('space') == True:
                                     j.x = 2
@@ -110,8 +108,13 @@ while run:
                             l = maps.maps(1)
                         if l[y][x] == 3:
                             Lavel = 2
+                        
+                        
+                        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
+                        sc.blit(surf2,rect2)
                         h.getPoint()
- 
+                        
+                        h.move()
                         
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
@@ -154,8 +157,8 @@ while run:
                                            #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
                                             rect1 = surf1.get_rect(bottomright=((i+1)*23,(j+1)*23))
                                             sc.blit(surf1,rect1)
-                                        if l[j][i] == 0:
-                                           pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
+                                        #if l[j][i] == 0:
+                                        #   pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
 
                                     else:
                                         pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
