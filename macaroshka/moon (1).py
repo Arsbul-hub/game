@@ -57,10 +57,16 @@ while run:
     # игра
     
     if Game == True:
-
+        h.move()
+        x,y = h.getPos()
+       
+        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
+        sc.blit(surf2,rect2)
+        h.getPoint()
+        
         # load texture
         if Lavel == 1:
-                    x,y = h.getPos()
+                    
                     print(point)
                     if keyboard.is_pressed('1') == True:
                             h.point = 422
@@ -110,11 +116,8 @@ while run:
                             Lavel = 2
                         
                         
-                        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
-                        sc.blit(surf2,rect2)
-                        h.getPoint()
+
                         
-                        h.move()
                         
                         rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
                         sc.blit(surf3,rect3)
