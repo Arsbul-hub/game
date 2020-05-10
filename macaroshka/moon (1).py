@@ -57,37 +57,10 @@ while run:
     # игра
     
     if Game == True:
-        x,y = h.getPos()
-        h.move()
-        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
-        sc.blit(surf2,rect2)
+
         # load texture
-        for j in range(30):
-                              for i in range(30):
-
-                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 5:
-
-
-                                        rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                                        sc.blit(surf5,rect5)
-                                        if l[j][i] == 2:
-                                            rect6 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                                            sc.blit(surf6,rect6)
-                                        if l[j][i] == 3:
-                                            rect7 = surf7.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                                            sc.blit(surf7,rect7)
-                                        if l[j][i] == 1:
-
-                                           #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                                            rect1 = surf1.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                                            sc.blit(surf1,rect1)
-                                        if l[j][i] == 0:
-                                           pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
-
-                                    else:
-                                        pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
-        # lavel
         if Lavel == 1:
+            
                     print(point)
                     if keyboard.is_pressed('1') == True:
                             h.point = 422
@@ -122,6 +95,10 @@ while run:
                                 h.l = l
                                 
                                 break
+                        x,y = h.getPos()
+                        h.move()
+                        rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
+                        sc.blit(surf2,rect2)
                         if point > 422:
                             if h.collision_check(j.getPos()) == True:
                                 if keyboard.is_pressed('space') == True:
@@ -158,6 +135,32 @@ while run:
             if boss_healf == 0:
                 Game = False
                 Menu = True
+        for j in range(30):
+                                for i in range(30):
+
+                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 5:
+
+
+                                        rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                        sc.blit(surf5,rect5)
+                                        if l[j][i] == 2:
+                                            rect6 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                            sc.blit(surf6,rect6)
+                                        if l[j][i] == 3:
+                                            rect7 = surf7.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                            sc.blit(surf7,rect7)
+                                        if l[j][i] == 1:
+
+                                           #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
+                                            rect1 = surf1.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                            sc.blit(surf1,rect1)
+                                        if l[j][i] == 0:
+                                           pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
+
+                                    else:
+                                        pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
+        # lavel
+
     pygame.display.update()
     pygame.time.delay(50)               
 pygame.quit()
