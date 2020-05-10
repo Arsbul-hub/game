@@ -65,7 +65,7 @@ while run:
         for j in range(30):
                               for i in range(30):
 
-                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 500:
+                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 5:
 
 
                                         rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
@@ -143,7 +143,7 @@ while run:
 
 
 
-                            
+                             
                             #Lavel = 2
         if Lavel == 2:
             for j in boss:
