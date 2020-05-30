@@ -175,22 +175,22 @@ while run:
 
                                         rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
                                         sc.blit(surf5,rect5)
-                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 2:
-                                            rect6 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                        if l[int(i)][int(j)] == 2:
+                                            rect6 = surf6.get_rect(bottomright=((my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2)))
                                             sc.blit(surf6,rect6)
-                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 3:
-                                            rect7 = surf7.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                        if l[int(i)][int(j)] == 3:
+                                            rect7 = surf7.get_rect(bottomright=(my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2))
                                             sc.blit(surf7,rect7)
-                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 1:
+                                        if l[int(i)][int(j)] == 1:
 
                                            #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                                            rect1 = surf1.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                                            rect1 = surf1.get_rect(bottomright=((my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2)))
                                             sc.blit(surf1,rect1)
                                         #if l[j][i] == 0:
                                         #   pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
 
                                     else:
-                                        pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
+                                        pygame.draw.rect(sc,(0,0,0),(my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2),23,23)
         # lavel
 #d
     pygame.display.update()
