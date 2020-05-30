@@ -3,17 +3,42 @@ from random import *
 import array
 import pygame
 import maps
+import math
 from Mobs import *
 import time
 l = maps.maps(0)
-sc = pygame.display.set_mode((690,690))
+sc = pygame.display.set_mode((140,140))
 run = True
 Menu = True
 Game = False
 Lavel = 0
 Plh = 3
 point = 0
-import math
+
+
+
+
+
+
+
+mi = 5
+wx  = 140
+lx = 30
+mx = wx/2
+
+mj = 5
+wy  = 140
+ly = 30
+my = wy/2
+
+
+
+
+
+
+
+
+
 #мпорт моделей
 surf1 = pygame.image.load("Images/block.png")
 surf2 = pygame.image.load("Images/pac.png")
@@ -26,7 +51,7 @@ surf7 = pygame.image.load("Images/portal.png")
 surf9 = pygame.image.load("Images/GoodJob.png")
 
 # ГЕРОЙ
-h = Hero(10,11,l,0)
+h = Hero(10,11,l,0,mi,mj)
 # монстры
 m = []
 num_monster = 0
@@ -59,7 +84,8 @@ while run:
     if Game == True:
         h.move()
         x,y = h.getPos()
-       
+        limy = int(math.ceil((wy-ly)/2/ly))
+        limx = int(math.ceil((wx-lx)/2/lx))
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
         sc.blit(surf2,rect2)
         h.getPoint()
@@ -141,21 +167,21 @@ while run:
             if boss_healf == 0:
                 Game = False
                 Menu = True
-        for j in range(30):
-                                for i in range(30):
+        for j in range(mi-limx,mi+limx+1):
+                                for i in range(mi-limx,mi+limx+1):
 
-                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 5:
+                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 500:
 
 
                                         rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
                                         sc.blit(surf5,rect5)
-                                        if l[j][i] == 2:
+                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 2:
                                             rect6 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
                                             sc.blit(surf6,rect6)
-                                        if l[j][i] == 3:
+                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 3:
                                             rect7 = surf7.get_rect(bottomright=((i+1)*23,(j+1)*23))
                                             sc.blit(surf7,rect7)
-                                        if l[j][i] == 1:
+                                        if l[int(my + (j - mj) * ly - ly/2)][math.ceil(mx + (i - mi) * lx - lx/2)] == 1:
 
                                            #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
                                             rect1 = surf1.get_rect(bottomright=((i+1)*23,(j+1)*23))

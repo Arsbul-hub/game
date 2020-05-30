@@ -6,9 +6,7 @@ import os
 pygame.init()
 sc = pygame.display.set_mode((690,690))
 run = True
-menu = 0
-game = 0
-lav = 1
+g = 0
 #print(ins)
 ##########
 #мпорт картинок
@@ -85,37 +83,35 @@ while run:
             
 ##таймер времяни
     tick+=0.1
-    if lav != 4:
-        if tick > 0.9 and game == 1:
+    if g != 4:
+        if tick > 0.9 and g != 0:
             tick = 0
             timer-=1
-        if menu == 0 and h == 0:
+        if g == 0 and h == 0:
             
             timer = 400
 #######
 #########отрисовка текстур по массиву
         f12 = pygame.font.SysFont(None, 36)
-    
     for j in range(30):
-            for i in range(30):
-                if game == 1 and menu == 1:
-                    if l[j][i] == 0:
-                        pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,20,20))
-                    if l[j][i] == 1:
-                        rect5 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                        sc.blit(surf6,rect5)
-                    if l[j][i] == 2:
-                        rect10 = surf11.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                        sc.blit(surf11,rect10)
-                    if l[j][i] == 3:
-                        rect11 = surf12.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                        sc.blit(surf12,rect11)
+        for i in range(30):
+                if l[j][i] == 0:
+                    pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,20,20))
+                if l[j][i] == 1:
+                    rect5 = surf6.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                    sc.blit(surf6,rect5)
+                if l[j][i] == 2:
+                    rect10 = surf11.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                    sc.blit(surf11,rect10)
+                if l[j][i] == 3:
+                    rect11 = surf12.get_rect(bottomright=((i+1)*23,(j+1)*23))
+                    sc.blit(surf12,rect11)
 #######
 #######пауза
     if g1 == "pause":
-        menu = 1
+        g = 0
 ######меню
-    if menu == 0 and game == 0:
+    if g == 0:
 
 
 
@@ -127,9 +123,8 @@ while run:
             y = 10
            
             l = maps.maps(0)
-        if h > 0 and g1 != "pause":
-
-
+        if h > 0:
+            #######
             mx = 3
             my = 20
             #######
@@ -144,6 +139,9 @@ while run:
             #######
             mx4 = 25
             my4 = 10
+            x = 11
+            y = 11
+
 #####пауза
 
         if g1 == "pause":
@@ -186,22 +184,21 @@ while run:
 
     gost.monsters.setText(sc,120,0,36,(180, 0, 0),"   Очки: "+str(lavel))
 
-    if lavel != 3:###если не бой с боссом
+    if g != 3:###если не бой с боссом
         gost.monsters.setText(sc,300,0,36,(180, 0, 0),"Здоровье: "+str(h))
 ########старт
     if timer == 0:
-        menu = 0
+        g = 0
     if ev.type == pygame.KEYDOWN:
-        if ev.key == pygame.K_LSHIFT and menu == 0:
-            menu = 0
-            game = 1
-            if game > 1:
-                game-=1
+        if ev.key == pygame.K_LSHIFT and g == 0:
+            g+=1
+            if g > 1:
+                g-=1
             sc.fill((0,0,0))
 
             lavel = 0
 ########игра
-    if game == 1: # монстры
+    if g == 1: # монстры
 ############################################################
                 if l[y][x] == 2:
                     lavel += 1
@@ -229,7 +226,7 @@ while run:
                     if  mx == x and my == y or x == mx and y == my or mx1 == x and my1 == y or x == mx1 and y == my1 or mx2 == x and my2 == y or x == mx2 and y == my2 or mx3 == x and my3 == y or x == mx3 and y == my3:
 
                         h -= 1
-                        menu = 0
+                        g = 0
                 if lavel > 422:#если собрали точка ловим пришельцев
                     
                     if keyboard.is_pressed(' ') == True:
@@ -256,8 +253,8 @@ while run:
                 if l[y][x] == 3:#если вошли в портал
                         x =  25
                         y = 10
-                        lav = 3
-    if lav == 3:#бой с боссом
+                        g = 3
+    if g == 3:#бой с боссом
 
                 
                 if keyboard.is_pressed(' ') == True and x == mx4 and y == my4:# бьём босса
@@ -272,11 +269,11 @@ while run:
 
                 l = maps.maps(2)
                 if bh == 0:
-                    lav = 4
-    if lav == 4:# таймер заставки
+                    g = 4
+    if g == 4:# таймер заставки
         gtick+=0.1
                     
-        if gtick > 1.5 and game == 1:
+        if gtick > 1.5 and g != 0:
             gtick = 0
             good-=1
         if good != 0:
@@ -288,16 +285,16 @@ while run:
 
         if good == 0:
             
-            menu = 0
+            g = 0
             good = 5
         
                    
         
 
-    if game ==  1 and lav != 4:#управление
-        if lav != 4:
+    if g != 0 and g != 4:#управление
+        if g != 4:
             if keyboard.is_pressed('r') == True:
-                lav = 3
+                g = 3
 #                bh = 0
             if keyboard.is_pressed('w') and l[y-1][x] != 1:
                 
@@ -313,7 +310,7 @@ while run:
         gost.monsters.setImg(sc,(mx1+1)*23,(my1+1)*23,"Images/0.png")
         gost.monsters.setImg(sc,(mx2+1)*23,(my2+1)*23,"Images/0.png")
         gost.monsters.setImg(sc,(mx3+1)*23,(my3+1)*23,"Images/0.png")
-        if lav == 3:#босс
+        if g == 3:#босс
             rect16 = surf8.get_rect(bottomright=((mx4+1)*23,(my4+1)*23))
             sc.blit(surf8,rect16)
     pygame.display.update()

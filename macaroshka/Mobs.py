@@ -41,21 +41,22 @@ class Monster(Mob):
                 self.rand = random.randint(1,4)
 
 class Hero(Mob):
-    def __init__(self,x,y,l,point):
+    def __init__(self,x,y,l,point,mi,mj):
         self.point = point
         self.l = l
-        
+        self.mi = mi
+        self.mj = mj
         Mob.__init__(self,x,y)
     def move(self):
                     if keyboard.is_pressed('w') and self.l[self.y-1][self.x] != 1:
                         
-                        self.y -= 1
+                        self.mj -= 1
                     if keyboard.is_pressed('s') and self.l[self.y+1][self.x] != 1:
-                        self.y += 1
+                        self.mj += 1
                     if keyboard.is_pressed('d') and self.l[self.y][self.x+1] != 1:
-                        self.x += 1
+                        self.mi += 1
                     if keyboard.is_pressed('a') and self.l[self.y][self.x-1] != 1:
-                        self.x -= 1
+                        self.mi -= 1
     def collision_check(self,mpos):
         if (self.y,self.x) == mpos or mpos == (self.y,self.x):
             return True
