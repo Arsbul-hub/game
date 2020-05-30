@@ -41,11 +41,11 @@ class Monster(Mob):
                 self.rand = random.randint(1,4)
 
 class Hero(Mob):
-    def __init__(self,x,y,l,point,mi,mj):
+    def __init__(self,x,y,l,point):
         self.point = point
         self.l = l
-        self.mi = mi
-        self.mj = mj
+        self.mi = 5
+        self.mj = 5
         Mob.__init__(self,x,y)
     def move(self):
                     if keyboard.is_pressed('w') and self.l[self.y-1][self.x] != 1:

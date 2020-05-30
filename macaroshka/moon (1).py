@@ -12,8 +12,6 @@ run = True
 Menu = True
 Game = False
 Lavel = 0
-Plh = 3
-point = 0
 
 
 
@@ -21,15 +19,8 @@ point = 0
 
 
 
-mi = 5
-wx  = 140
-lx = 30
-mx = wx/2
 
-mj = 5
-wy  = 140
-ly = 30
-my = wy/2
+
 
 
 
@@ -51,17 +42,17 @@ surf7 = pygame.image.load("Images/portal.png")
 surf9 = pygame.image.load("Images/GoodJob.png")
 
 # ГЕРОЙ
-h = Hero(10,11,l,0,mi,mj)
+h = Hero(10,11,l,0)
 # монстры
-m = []
-num_monster = 0
-boss = []
-boss_healf = 100
-rand = random.randint(1,4)
-for i in range(4):
-    m.append(Monster(10,12,maps.maps(0),randint(1,4)))
-for boss_num in range(1):
-    boss.append(Monster(10,12,maps.maps(0),randint(1,4)))
+mi = h.mi
+wx  = 140
+lx = 30
+mx = wx/2
+
+mj = h.mj
+wy  = 140
+ly = 30
+my = wy/2
 while run:
     # Проверка событий
     sc.fill((0,0,0))
@@ -88,109 +79,37 @@ while run:
         limx = int(math.ceil((wx-lx)/2/lx))
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
         sc.blit(surf2,rect2)
-        h.getPoint()
         
-        # load texture
-        if Lavel == 1:
-                    
-                    print(point)
-                    if keyboard.is_pressed('1') == True:
-                            h.point = 422
-                            Lavel = 2
-                    point = h.point
+        
 
-                    # монстры
-                    
-                    for j in m:
-                        j.move()
 
-                        mx,my = j.getPos()
 
                     
-                        #print(h.collision_check(m[j].getPos()))
-                        if h.collision_check(j.getPos()) == True and point <= 422:
-                        
-                            Plh -= 1
-                            Game = False
-                            Menu = True
                         
                             
-                            if Plh == 0:
-                                print("fff")
-                                h.setPoint()
-                                #point = 0
-                                Plh = 3
-                                #Plh -= 1
 
 
-                                l = maps.maps(0)
-                                h.l = l
-                                
-                                break
 
 
-                        if point >= 422:
-                            if h.collision_check(j.getPos()) == True:
-                                if keyboard.is_pressed('space') == True:
-                                    j.x = 2
-                                    j.y = 2
-                                    num_monster += 1
-                        if num_monster == 4:
-                            h.l = maps.maps(1)
-                            l = maps.maps(1)
-                        if l[y][x] == 3:
-                            Lavel = 2
-                        
-                        
-
-                        
-                        
-                        rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
-                        sc.blit(surf3,rect3)
 
                                     
 
 
 
                              
-                            #Lavel = 2
-        if Lavel == 2:
-            for j in boss:
-                j.move()
 
-                mx,my = j.getPos()
-                rect3 = surf3.get_rect(bottomright=((my+1)*23,(mx+1)*23))
-                sc.blit(surf3,rect3)
-            if h.collision_check(j.getPos()) == True and keyboard.is_pressed('space') == True:
-                boss_healf -= 1
-            print(boss_healf)
-            if boss_healf == 0:
-                Game = False
-                Menu = True
-        for j in range(mi-limx,mi+limx+1):
-                                for i in range(mi-limx,mi+limx+1):
-
-                                    if math.sqrt(pow(x-i,2)+pow(y-j,2)) < 500:
+        for j in range(mi-limy,mi+limy+1):
+                                for i in range(mj-limx,mj+limx+1):
 
 
-                                        rect5 = surf5.get_rect(bottomright=((i+1)*23,(j+1)*23))
-                                        sc.blit(surf5,rect5)
-                                        if l[int(i)][int(j)] == 2:
-                                            rect6 = surf6.get_rect(bottomright=((my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2)))
-                                            sc.blit(surf6,rect6)
-                                        if l[int(i)][int(j)] == 3:
-                                            rect7 = surf7.get_rect(bottomright=(my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2))
-                                            sc.blit(surf7,rect7)
-                                        if l[int(i)][int(j)] == 1:
+
+                                        if l[j][i] == 1:
 
                                            #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                                            rect1 = surf1.get_rect(bottomright=((my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2)))
+                                            rect1 = surf1.get_rect(bottomright=(math.ceil(my + (j - mj) * ly - ly/2),math.ceil(mx + (i - mi) * lx - lx/2)))
                                             sc.blit(surf1,rect1)
                                         #if l[j][i] == 0:
                                         #   pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
-
-                                    else:
-                                        pygame.draw.rect(sc,(0,0,0),(my + (j - mj) * ly - ly/2,mx + (i - mi) * lx - lx/2),23,23)
         # lavel
 #d
     pygame.display.update()
