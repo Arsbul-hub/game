@@ -25,12 +25,12 @@ surf9 = pygame.image.load("Images/GoodJob.png")
 # ГЕРОЙ
 h = Hero(10,11,l,0)
 # монстры
-mi = h.mi
+
 wx  = 140
 lx = 23
 mx = wx/2
 
-mj = h.mj
+
 wy  = 140
 ly = 23
 my = wy/2
@@ -47,8 +47,10 @@ while run:
     
     if Game == True:
         h.move()
+        mi = h.mi
+        mj = h.mj
         x,y = h.getPos()
-        print(x,y)
+        print(mi,mi)
         limy = int(math.ceil((wy-ly)/2/ly))
         limx = int(math.ceil((wx-lx)/2/lx))
         rect2 = surf2.get_rect(bottomright=((x+1)*23,(y+1)*23))
