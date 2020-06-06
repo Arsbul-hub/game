@@ -53,10 +53,10 @@ while run:
         print(x,y) 
         limy = int(math.ceil((wy-ly)/2/ly))
         limx = int(math.ceil((wx-lx)/2/lx))
-
+        #print(mi+limx+2)
         #ygame.display.update()
-        for j in range(mj-limy,mj+limy+2):
-                                for i in range(mi-limx,mi+limx+2):
+        for j in range(mj-limy,8):
+                                for i in range(mi-limx,8):
 
 
                                         if l[j][i] == 1:

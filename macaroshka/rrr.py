@@ -1,20 +1,20 @@
 import array
 l = []
 p = 0
+o = 0
 mas = []
-for i in range(5):
+for i in range(8):
+  row = []
+  p = o
+  print("ffffffffff:  " + str(o))
+  for j in range(8):
+    row.append(p)
+    o = p
     if p == 1:
-        l.append(p)
         p = 0
-    if p == 0:
-        l.append(p)
+
+    elif p == 0:
         p = 1
     
-    if i == 7:
-        p = 1
-        l.append(p)
-    l = []
-    mas =[]
-    for j in range(8):
-        mas.append(l)
+  mas.append(row)
 print(mas)
