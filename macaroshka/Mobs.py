@@ -44,19 +44,18 @@ class Hero(Mob):
     def __init__(self,x,y,l,point):
         self.point = point
         self.l = l
-        self.mi = 5
-        self.mj = 5
+
         Mob.__init__(self,x,y)
     def move(self):
-                    if keyboard.is_pressed('w') and self.l[self.y-1][self.x] != 1:
+                    if keyboard.is_pressed('w'):
                         
-                        self.mj -= 1
-                    if keyboard.is_pressed('s') and self.l[self.y+1][self.x] != 1:
-                        self.mj += 1
-                    if keyboard.is_pressed('d') and self.l[self.y][self.x+1] != 1:
-                        self.mi += 1
-                    if keyboard.is_pressed('a') and self.l[self.y][self.x-1] != 1:
-                        self.mi -= 1
+                        self.y -= 1
+                    if keyboard.is_pressed('s'):
+                        self.y += 1
+                    if keyboard.is_pressed('d'):
+                        self.x += 1
+                    if keyboard.is_pressed('a'):
+                        self.x -= 1
     def collision_check(self,mpos):
         if (self.y,self.x) == mpos or mpos == (self.y,self.x):
             return True
