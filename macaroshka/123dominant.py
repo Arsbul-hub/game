@@ -24,16 +24,7 @@ surf9 = pygame.image.load("Images/GoodJob.png")
 surf10 = pygame.image.load("Images/wh.png")
 # ГЕРОЙ
 h = Hero(10,11,l,0)
-# монстры
 
-wx  = 640
-lx = 80
-mx = wx/2
-
-#VEW_Fragment_xy = 
-wy  = 640
-ly = 80
-my = wy/2
 while run:
     # Проверка событий
     sc.fill((0,0,0))
@@ -47,31 +38,26 @@ while run:
     
     if Game == True:
         h.move() 
-        mi = h.x 
-        mj = h.y 
+        x = h.x 
+        y = h.y 
         x,y = h.getPos() 
-        #print(x,y) 
-        limy = int(math.ceil((wy-ly)/2/ly))
-        limx = int(math.ceil((wx-lx)/2/lx))
-        print(mi+limx+2)
-        #ygame.display.update()
-        for j in range(mj-limy,8):
-                                for i in range(mi-limx,8):
+
+        for j in range(8):
+                                for i in range(8):
 
 
                                         if l[j][i] == 1:
 
                                            #pygame.draw.rect(sc,(0,0,0),((j+1)*23,(i+1)*23,23,23))
-                                            rect1 = surf1.get_rect(bottomright=(math.ceil(mx + (i - mi) * lx - lx/2),math.ceil(my + (j - mj) * ly - ly/2)))
+                                            rect1 = surf1.get_rect(bottomright=((i+1)*80,(j+1)*80))
                                             sc.blit(surf1,rect1)
                                         #if l[j][i] == 0:
                                         #   pygame.draw.rect(sc,(0,0,0),((i+1)*23,(j+1)*23,23,23))
                                         if l[j][i] == 0:
-                                            rect10 = surf10.get_rect(bottomright=(math.ceil(mx + (i - mi) * lx - lx/2),math.ceil(my + (j - mj) * ly - ly/2)))
+                                            rect10 = surf10.get_rect(bottomright=((i+1)*80,(j+1)*80))
                                             sc.blit(surf10,rect10)
                                             
-        rect2 = surf2.get_rect(bottomright=(math.ceil(mx + (mi - mi) * lx - lx/2),math.ceil(my + (mj - mj) * ly - ly/2)))
-        sc.blit(surf2,rect2)
+
         pygame.display.update()
     pygame.time.delay(50)               
 pygame.quit()
