@@ -3,11 +3,11 @@ l = []
 p = 0
 o = 0
 mas = []
-for i in range(8):
+for i in range(20):
   row = []
   p = o
-  print("ffffffffff:  " + str(o))
-  for j in range(8):
+
+  for j in range(20):
     row.append(p)
     o = p
     if p == 1:
