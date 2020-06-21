@@ -64,7 +64,7 @@ while run:
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             run = False
-    # меню
+    # меню hh
     for i in range(8):
         for j in range(8):
             if fmas[i][j] == p1.fgroup:
