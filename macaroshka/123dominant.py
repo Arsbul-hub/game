@@ -31,6 +31,33 @@ surf10 = pygame.image.load("Images/wh.png")
 # ГЕРОЙ
 h = Hero(10,11,l,0)
 Disk = 0
+
+
+class Figure(object):
+    def init(self,x,y,mas,fgroup,ftype):
+       self.x=x
+       self.y=y
+       self.fgroup=fgroup
+       self.ftype=ftype
+       self.mas=mas
+       self.mas[x][y] = self.fgroup
+
+class player(object):
+
+    def init(self, fgroup, name=None):
+        self.fgroup = fgroup
+        if name is None:
+            self.name = "x2dred"#генератор имен(изменено)
+        else:
+           self.name = name
+        self.list_figures = []
+    def create_figure(self,x,y,mas,fgroup,ftype=1):
+         self.list_figures.append(Figure(x,y,mas,self.fgroup,ftype))
+
+p1 = player.__init__('1',1)
+p2 = player.__init__('2',2)
+step = 1
+fmas = maps.maps(2)
 while run:
     # Проверка событий
     sc.fill((0,0,0))
@@ -38,6 +65,25 @@ while run:
         if ev.type == pygame.QUIT:
             run = False
     # меню
+    for i in range(8):
+        for j in range(8):
+            if fmas[i][j] == p1.fgroup:
+                pygame.draw.circle(sc,(45,45,45),(i*32,j*32,32))
+            elif fmas[i][j] == p2.fgroup:
+                pygame.draw.circle(sc,(210,210,210),(i*32,j*32,32))
+    if step == 1:
+        
+        if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
+            step = 2
+        dra
+    if step == 2:
+        if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
+            step = 3
+
+    if step == 3:
+        if keyboard.is_pressed('enter') == True:
+            step = 4
+
     if Menu == True and Game == False:
          for i in range(20):
             for j in range(20):
