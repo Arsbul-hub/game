@@ -34,7 +34,7 @@ Disk = 0
 
 
 class Figure(object):
-    def init(self,x,y,mas,fgroup,ftype):
+    def __init__(self,x,y,mas,fgroup,ftype):
        self.x=x
        self.y=y
        self.fgroup=fgroup
@@ -44,7 +44,7 @@ class Figure(object):
 
 class player(object):
 
-    def init(self, fgroup, name=None):
+    def __init__(self, fgroup, name=None):
         self.fgroup = fgroup
         if name is None:
             self.name = "x2dred"#генератор имен(изменено)
@@ -54,8 +54,8 @@ class player(object):
     def create_figure(self,x,y,mas,fgroup,ftype=1):
          self.list_figures.append(Figure(x,y,mas,self.fgroup,ftype))
 
-p1 = player.__init__('1',1)
-p2 = player.__init__('2',2)
+p1 = player('1',1)
+p2 = player('2',2)
 step = 1
 fmas = maps.maps(2)
 while run:
@@ -71,11 +71,12 @@ while run:
                 pygame.draw.circle(sc,(45,45,45),(i*32,j*32,32))
             elif fmas[i][j] == p2.fgroup:
                 pygame.draw.circle(sc,(210,210,210),(i*32,j*32,32))
+        
     if step == 1:
         
         if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
             step = 2
-        dra
+        
     if step == 2:
         if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
             step = 3
@@ -129,7 +130,8 @@ while run:
         x,y = h.getPos() 
 
             #
-            
+        mx,my = pygame.mouse.get_pos()
+        print(int(mx/(XSize/XItem)),int(my/(YSize/YItem)),mx,my)
         for j in range(8):
                                 for i in range(8):
 
