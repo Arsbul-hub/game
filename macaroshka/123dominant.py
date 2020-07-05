@@ -161,9 +161,10 @@ while run:
             elif m1.get_clik((0,1,0)) == True and len(p1.list_figures) > 1:
                 step = 2
 
-            elif keyboard.is_pressed('r') and len(p1.list_figures) > 1:
+            elif m2.get_clik((0,0,1)) and len(p1.list_figures) > 1:
                 p1.list_figures.pop()
                 lmas[y1][x1] = 0
+                print(lmas[y1][x1])
         elif step == 2:
 
             x1,y1 = p1.get_indexPos(mx,my,XSize/XItem,YSize/YItem)
@@ -176,7 +177,7 @@ while run:
                 #print(l[int(x1)][int(y1)])        
             elif m1.get_clik((0,1,0)) == True and len(p2.list_figures) > 1:
                 step = 3
-            elif keyboard.is_pressed('r') and len(p2.list_figures) > 1:
+            elif m3.get_clik((0,0,1)) and len(p2.list_figures) > 1:
                 p2.list_figures.pop()
                 lmas[y1][x1] = 0
         elif step == 3:
