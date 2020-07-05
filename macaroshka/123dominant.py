@@ -1,3 +1,5 @@
+from pynput.mouse import Button, Controller
+
 import keyboard
 from random import *
 import array
@@ -28,19 +30,20 @@ surf7 = pygame.image.load("Images/portal.png")
 #surf8 = pygame.image.load("Images/stars.png")
 surf9 = pygame.image.load("Images/GoodJob.png")
 surf10 = pygame.image.load("Images/wh.png")
+surf11 = pygame.image.load("Images/pack.png")
 # ГЕРОЙ
 h = Hero(10,11,l,0)
 Disk = 0
 
 
 class Figure(object):
-    def __init__(self,x,y,mas,fgroup,ftype):
+    def __init__(self,x,y,mas,ftype):
        self.x=x
        self.y=y
-       self.fgroup=fgroup
+       
        self.ftype=ftype
        self.mas=mas
-       self.mas[x][y] = self.fgroup
+       #self.mas[self.x][self.y] = 3
 
 class player(object):
 
@@ -51,39 +54,56 @@ class player(object):
         else:
            self.name = name
         self.list_figures = []
-    def create_figure(self,x,y,mas,fgroup,ftype=1):
-         self.list_figures.append(Figure(x,y,mas,self.fgroup,ftype))
+    def create_figure(self,x,y,xi,yi,mas,ftype=1):
+         self.list_figures.append(Figure(xi,yi,mas,ftype))
+    def del_fugure(self,x):
+        self.mas.remove(х)
+    def get_indexPos(self,mx,my,Xsize,Ysize):
+        self.my = my
+        self.mx = mx
+        self.Xsize = Xsize
+        self.Ysize = Ysize
+        return int(self.mx/(self.Xsize)),int(self.my/(self.Ysize))
+class Mouse(object):
+    def __init__(self):
 
+        self.flag = False
+        self.flag1 = False
+        self.step = 1
+    def get_clik(self,but):
+        
+        if self.flag == False:
+                self.flag = pygame.mouse.get_pressed() == but
+                self.step = 1
+        else:
+                if pygame.mouse.get_pressed() == (0,0,0):
+
+                          self.flag = False
+                          
+                          return True
+        return False
+        
+
+m = Mouse()
+m1 = Mouse()
+m2 = Mouse()
+m3 = Mouse()
 p1 = player('1',1)
 p2 = player('2',2)
+
 step = 1
+lmas = maps.maps(2)
 fmas = maps.maps(2)
 while run:
+    
     # Проверка событий
     sc.fill((0,0,0))
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             run = False
     # меню hh
-    for i in range(8):
-        for j in range(8):
-            if fmas[i][j] == p1.fgroup:
-                pygame.draw.circle(sc,(45,45,45),(i*32,j*32,32))
-            elif fmas[i][j] == p2.fgroup:
-                pygame.draw.circle(sc,(210,210,210),(i*32,j*32,32))
-        
-    if step == 1:
-        
-        if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
-            step = 2
-        
-    if step == 2:
-        if keyboard.is_pressed('enter') == True and len(p1.list_figures) < 1:
-            step = 3
 
-    if step == 3:
-        if keyboard.is_pressed('enter') == True:
-            step = 4
+        
 
     if Menu == True and Game == False:
          for i in range(20):
@@ -96,11 +116,11 @@ while run:
          mx,my = pygame.mouse.get_pos()
          
          
-         if mas[int(my/32)][int(mx/32)] == 1 and pygame.mouse.get_pressed() == (1,0,0):
+         if mas[int(my/32)][int(mx/32)] == 1 and pygame.mouse.get_pressed() == (0,0,1):
              #print("g")
              Game = True
              Menu = False
-         if mas[int(my/32)][int(mx/32)] == 2 and pygame.mouse.get_pressed() == (1,0,0):
+         if mas[int(my/32)][int(mx/32)] == 2 and pygame.mouse.get_pressed() == (0,0,1):
             
             if Disk == 0:
                  Size = (160,160)
@@ -124,14 +144,52 @@ while run:
     if Game == True and Menu == False:
         XSize,YSize = Size
         XItem,YItem = Items
-        h.move() 
-        x = h.x 
-        y = h.y 
-        x,y = h.getPos() 
+        
 
-            #
+        
         mx,my = pygame.mouse.get_pos()
-        print(int(mx/(XSize/XItem)),int(my/(YSize/YItem)),mx,my)
+        if step == 1:
+            
+            x1,y1 = p1.get_indexPos(mx,my,XSize/XItem,YSize/YItem)
+            
+            if m.get_clik((1,0,0)) == True and l[y1][x1] == 1 and lmas[y1][x1] == 0 and y1 < 3:
+                #print("uu")
+                
+                p1.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,3)
+                lmas[y1][x1] = 3
+                #print(l[int(x1)][int(y1)])        
+            elif m1.get_clik((0,1,0)) == True and len(p1.list_figures) > 1:
+                step = 2
+
+            elif keyboard.is_pressed('r') and len(p1.list_figures) > 1:
+                p1.list_figures.pop()
+                lmas[y1][x1] = 0
+        elif step == 2:
+
+            x1,y1 = p1.get_indexPos(mx,my,XSize/XItem,YSize/YItem)
+
+            if m.get_clik((1,0,0)) == True and l[y1][x1] == 1 and lmas[y1][x1] == 0 and y1 > 4:
+                #print("uu")
+                
+                p2.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,3)
+                lmas[y1][x1] = 3
+                #print(l[int(x1)][int(y1)])        
+            elif m1.get_clik((0,1,0)) == True and len(p2.list_figures) > 1:
+                step = 3
+            elif keyboard.is_pressed('r') and len(p2.list_figures) > 1:
+                p2.list_figures.pop()
+                lmas[y1][x1] = 0
+        elif step == 3:
+            if m.get_clik((0,1,0)) == True:
+                step = 4
+
+
+        
+
+        #print(m.get_clik())
+        
+
+
         for j in range(8):
                                 for i in range(8):
 
@@ -151,6 +209,9 @@ while run:
                                             sc.blit(pygame.transform.scale(surf10,(int(XSize/XItem),int(YSize/YItem))), ((i)*int(XSize/XItem),(j)*int(YSize/YItem)))
                                             #print(pygame.transform.get_smoothscale_backend())
                                             #sc.blit(surf10,rect10)
+                                        if lmas[j][i] == 3:
+                                            sc.blit(pygame.transform.scale(surf11,(int(XSize/XItem),int(YSize/YItem))), ((i)*int(XSize/XItem),(j)*int(YSize/YItem)))
+
         ButtonX,ButtonY = Buttons
         for i in range(20):
             for j in range(20):
@@ -179,7 +240,11 @@ while run:
                 Size = (640,640)
                 Disk = 0
             Display.set_mode(Size)                                            
-                                        #print(math.ceil(5.55,1))
+
+
+
+
+
         pygame.display.update()
-    pygame.time.delay(50)               
+    #ygame.time.delay(50)               
 pygame.quit()
