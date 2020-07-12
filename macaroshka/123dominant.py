@@ -1,5 +1,4 @@
-from pynput.mouse import Button, Controller
-
+import os
 import keyboard
 from random import *
 import array
@@ -30,16 +29,17 @@ surf7 = pygame.image.load("Images/portal.png")
 #surf8 = pygame.image.load("Images/stars.png")
 surf9 = pygame.image.load("Images/GoodJob.png")
 surf10 = pygame.image.load("Images/wh.png")
-surf11 = pygame.image.load("Images/pack.png")
+surf11 = pygame.image.load("Images/black.png")
+surf12 = pygame.image.load("Images/white.png")
 # ГЕРОЙ
 h = Hero(10,11,l,0)
 Disk = 0
 
 
 class Figure(object):
-    def __init__(self,x,y,mas,ftype):
-       self.x=x
-       self.y=y
+    def __init__(self,xi,yi,mas,ftype):
+       self.xi=xi
+       self.yi=yi
        
        self.ftype=ftype
        self.mas=mas
@@ -54,7 +54,7 @@ class player(object):
         else:
            self.name = name
         self.list_figures = []
-    def create_figure(self,x,y,xi,yi,mas,ftype=1):
+    def create_figure(self,x,y,xi,yi,mas,ftype="unknown"):
          self.list_figures.append(Figure(xi,yi,mas,ftype))
     def del_fugure(self,x):
         self.mas.remove(х)
@@ -149,22 +149,35 @@ while run:
         
         mx,my = pygame.mouse.get_pos()
         if step == 1:
-            
             x1,y1 = p1.get_indexPos(mx,my,XSize/XItem,YSize/YItem)
+            #print(y1 < 3,m.get_clik((1,0,0)),l[y1][x1] == 1)
+            
             
             if m.get_clik((1,0,0)) == True and l[y1][x1] == 1 and lmas[y1][x1] == 0 and y1 < 3:
                 #print("uu")
                 
-                p1.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,3)
-                lmas[y1][x1] = 3
-                #print(l[int(x1)][int(y1)])        
+                p1.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,"black")
+                lmas[y1][x1] = 1
+                #print(l[int(x1)][int(y1)])   
+            if y1 > 5 and m1.get_clik((1,0,0)) == True and l[y1][x1] == 1:
+                
+                os.startfile(r'Images\error1.vbs')
+            elif m2.get_clik((0,0,1)) and len(p1.list_figures) > 1:
+                for i in range(len(p1.list_figures)):
+                    
+                    if p1.list_figures[i].xi == y1 and p1.list_figures[i].yi == x1:
+                        
+                        p1.list_figures.pop(i)
+                        lmas[y1][x1] = 0
+                        break
             elif m1.get_clik((0,1,0)) == True and len(p1.list_figures) > 1:
                 step = 2
+                os.startfile(r'Images\wearing.vbs')
 
-            elif m2.get_clik((0,0,1)) and len(p1.list_figures) > 1:
-                p1.list_figures.pop()
-                lmas[y1][x1] = 0
-                print(lmas[y1][x1])
+
+                    
+
+                
         elif step == 2:
 
             x1,y1 = p1.get_indexPos(mx,my,XSize/XItem,YSize/YItem)
@@ -172,18 +185,27 @@ while run:
             if m.get_clik((1,0,0)) == True and l[y1][x1] == 1 and lmas[y1][x1] == 0 and y1 > 4:
                 #print("uu")
                 
-                p2.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,3)
-                lmas[y1][x1] = 3
-                #print(l[int(x1)][int(y1)])        
+                p2.create_figure((y1)*int(XSize/XItem),(x1)*int(YSize/YItem),y1,x1,lmas,"white")
+                lmas[y1][x1] = 2
+                #print(l[int(x1)][int(y1)])
+            if y1 < 3 and m2.get_clik((1,0,0)) == True and l[y1][x1] == 1:
+                
+                os.startfile(r'Images\error1.vbs')
+            elif m2.get_clik((0,0,1)) and len(p2.list_figures) > 1:
+                for i in range(len(p2.list_figures)):
+                    
+                    if p2.list_figures[i].xi == y1 and p2.list_figures[i].yi == x1:
+                        
+                        p2.list_figures.pop(i)
+                        lmas[y1][x1] = 0
+                        break
             elif m1.get_clik((0,1,0)) == True and len(p2.list_figures) > 1:
                 step = 3
-            elif m3.get_clik((0,0,1)) and len(p2.list_figures) > 1:
-                p2.list_figures.pop()
-                lmas[y1][x1] = 0
+
         elif step == 3:
             if m.get_clik((0,1,0)) == True:
                 step = 4
-
+                os.startfile(r'Images\wearing.vbs')
 
         
 
@@ -210,8 +232,10 @@ while run:
                                             sc.blit(pygame.transform.scale(surf10,(int(XSize/XItem),int(YSize/YItem))), ((i)*int(XSize/XItem),(j)*int(YSize/YItem)))
                                             #print(pygame.transform.get_smoothscale_backend())
                                             #sc.blit(surf10,rect10)
-                                        if lmas[j][i] == 3:
+                                        if lmas[j][i] == 1:
                                             sc.blit(pygame.transform.scale(surf11,(int(XSize/XItem),int(YSize/YItem))), ((i)*int(XSize/XItem),(j)*int(YSize/YItem)))
+                                        if lmas[j][i] == 2:
+                                            sc.blit(pygame.transform.scale(surf12,(int(XSize/XItem),int(YSize/YItem))), ((i)*int(XSize/XItem),(j)*int(YSize/YItem)))
 
         ButtonX,ButtonY = Buttons
         for i in range(20):
@@ -224,11 +248,11 @@ while run:
          
 
         if mas[int(my/int(YSize/ButtonY))][int(mx/int(XSize/ButtonX))] == 2 and pygame.mouse.get_pressed() == (1,0,0):
-            
+                
             if Disk == 0:
-                 Size = (160,160)
-                 Disk = 1
-                 
+                     Size = (160,160)
+                     Disk = 1
+                     
             elif Disk == 1:
                 Size = (560,560)
                 Disk = 2
